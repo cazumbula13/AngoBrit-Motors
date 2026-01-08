@@ -481,16 +481,24 @@
     }
 
     // Eventos
-document.addEventListener("DOMContentLoaded", () => {
-  renderProducts(products);
-  renderCart();
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts(products);
+      renderCart();
 
-  byId("search").addEventListener("input", (e) => searchProducts(e.target.value));
-  byId("clearSearch").addEventListener("click", () => {
-    byId("search").value = "";
-    renderProducts(products);
-  });
-});
+      byId("search").addEventListener("input", (e) => searchProducts(e.target.value));
+      byId("clearSearch").addEventListener("click", () => {
+        byId("search").value = "";
+        renderProducts(products);
+      });
+
+      byId("checkout").addEventListener("click", () => {
+        const qty = cart.length;
+        if (!qty) { alert("Carrinho vazio."); return; }
+        alert(`Compra finalizada com ${qty} item(ns). Obrigado!`);
+        cart.length = 0;
+        renderCart();
+        byId("recommendation-list").innerHTML = "";
+      });
     });
 	function finalizePurchase() {
   if (cart.length === 0) {
