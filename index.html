@@ -482,8 +482,8 @@
 
     // Eventos
 document.addEventListener("DOMContentLoaded", () => {
-  renderProducts(products);
-  renderCart();
+  renderProducts(products);   // mantém
+  renderCart();               // mantém
 
   byId("search").addEventListener("input", (e) => searchProducts(e.target.value));
   byId("clearSearch").addEventListener("click", () => {
@@ -491,7 +491,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts(products);
   });
 });
-    });
 	function finalizePurchase() {
   if (cart.length === 0) {
     alert("Carrinho vazio!");
