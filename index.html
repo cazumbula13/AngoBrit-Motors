@@ -500,6 +500,18 @@
         byId("recommendation-list").innerHTML = "";
       });
     });
+	function finalizePurchase() {
+  if (cart.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  // Salvar carrinho no localStorage
+  localStorage.setItem("carrinhoAngoBrit", JSON.stringify(cart));
+
+  // Redirecionar para página de checkout
+  window.location.href = "checkout.html";
+}
   </script>
   </body>
 </html>
