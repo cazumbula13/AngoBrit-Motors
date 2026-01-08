@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout – AngoBrit Motors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Resumo da Compra</h1>
+  </header>
+
+  <main class="content">
+    <section class="container" id="checkout-list"></section>
+
+    <aside class="sidebar">
+      <h2>Formas de Pagamento</h2>
+      <ul>
+        <li>💳 Transferência Bancária</li>
+        <li>🏧 Multicaixa Express</li>
+        <li>📲 WhatsApp: <a href="https://wa.me/244XXXXXXXXX" target="_blank">Falar agora</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <script>
+    const carrinho = JSON.parse(localStorage.getItem("carrinhoAngoBrit")) || [];
+    const container = document.getElementById("checkout-list");
+    let total = 0;
+
+    carrinho.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <h3>${item.name}</h3>
+        <p class="price">${item.price.toLocaleString()} AKZ</p>
+      `;
+      container.appendChild(div);
+      total += item.price;
+    });
+
+    const resumo = document.createElement("div");
+    resumo.className = "cart-total";
+    resumo.innerHTML = `<strong>Total:</strong> ${total.toLocaleString()} AKZ`;
+    container.appendChild(resumo);
+  </script>
+</body>
+</html>
