@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AngoBrit Motors</title>
+    <style>
+    :root {
+      --primary: #0f1c2e;  /* azul profundo premium */
+      --accent: #c4a061;   /* dourado discreto */
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #2b2b2b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary), #1f3558);
+      color: white;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand .badge {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .search-bar input {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #d8dce2;
+      width: 100%;
+      background: #fff;
+      outline: none;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .product {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1px solid #eef0f4;
+    }
+
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #e9edf3;
+    }
+
+    .product h3 {
+      margin: 0.2rem 0 0.1rem;
+      font-size: 1rem;
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: #5c6675;
+    }
+
+    .price {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.55rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    button.outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .sidebar {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      padding: 1rem;
+      border: 1px solid #eef0f4;
+      position: sticky;
+      top: 1rem;
+      height: fit-content;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 1.05rem;
+      border-bottom: 2px solid #eef0f4;
+      padding-bottom: 0.5rem;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.6rem;
+      border-top: 2px solid #eef0f4;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .recommendations {
+      margin-top: 1rem;
+      background: #f2f6fb;
+      border: 1px dashed #d4dbe7;
+      border-radius: 10px;
+      padding: 0.75rem;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      background: #eef2f8;
+      color: #1f3558;
+      border: 1px solid #d8dce2;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+    }
+
+    @media (max-width: 900px) {
+      .content { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+	.order-form {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f9fafc;
+  border: 1px solid #d8dce2;
+  border-radius: 10px;
+}
+
+.order-form h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  border-bottom: 2px solid #eef0f4;
+  padding-bottom: 0.5rem;
+}
+
+.order-form label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.order-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.order-form button {
+  margin-top: 0.8rem;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.whatsapp-btn {
+  display: block;
+  margin-top: 0.8rem;
+  width: 100%;
+  text-align: center;
+  background: #25D366; /* verde oficial do WhatsApp */
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe5d;
+}
+
+
+  </style>
+  </head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="badge"></span>
+      <h1>AngoBrit Motors</h1>
+    </div>
+    <div class="search-bar">
+      <input id="search" type="text" placeholder="Pesquisar por peça, marca ou modelo...">
+      <button class="outline" id="clearSearch">Limpar</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section>
+      <div class="container" id="product-list">
+        <!-- Produtos gerados via JavaScript -->
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <h2>Carrinho</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total">0 AKZ</span>
+      </div>
+      <button id="checkout">Finalizar Compra</button>
+
+      <div class="recommendations">
+        <h2 style="margin-top:0">Recomendações</h2>
+        <div id="recommendation-list"></div>
+      </div>
+	  <div class="order-form">
+  <h2>Pedido Rápido</h2>
+  <form id="orderForm">
+    <label>Nome:</label>
+    <input type="text" id="custName" required>
+
+    <label>Telefone:</label>
+    <input type="tel" id="custPhone" required>
+
+    <label>Modelo do carro:</label>
+    <input type="text" id="custModel" required>
+
+    <button type="submit">Enviar Pedido</button>
+  </form>
+</div>
+    </aside>
+	<div class="order-form">
+  <h2>Finalizar Pedido</h2>
+  
+  <label for="name">Nome</label>
+  <input type="text" id="name" name="name">
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email">
+
+  <button type="submit">Enviar Pedido</button>
+
+  <!-- Botão WhatsApp -->
+  <a href="https://wa.me/244927222930?text=Olá%20quero%20fazer%20um%20pedido"
+     class="whatsapp-btn" target="_blank">
+     📲 Falar no WhatsApp
+  </a>
+</div>
+	
+  </main>
+    <script>
+    // Catálogo premium com marcas e compatibilidades
+    const products = [
+      { id: 1, name: "Suspensão Range Rover Sport", price: 450000, category: "Suspensão", brand: "Land Rover", models: ["Range Rover Sport (2014-2019)"], image: "imagens/Suspensao-Range-Rover-Sport.jpg" },
+      { id: 2, name: "Faróis LED Jaguar F-Pace", price: 320000, category: "Iluminação", brand: "Jaguar", models: ["F-Pace (2016-2021)"], image: "imagens/Faróis-LED-Jaguar-F-Pace.jpg" },
+      { id: 3, name: "Filtro de óleo Land Rover Evoque", price: 85000, category: "Motor", brand: "Land Rover", models: ["Evoque (2015-2020)"], image: "imagens/Filtro-de-oleo-Land-Rover-Evoque.jpg" },
+      { id: 4, name: "Kit de freios BMW X5", price: 270000, category: "Travagem", brand: "BMW", models: ["X5 (2013-2018)"], image: "imagens/Kit-de-freios-BMW-X5.jpg" },
+      { id: 5, name: "Retrovisor elétrico Mercedes GLE", price: 190000, category: "Carroçaria", brand: "Mercedes-Benz", models: ["GLE (2015-2019)"], image: "imagens/Retrovisor-elétrico-Mercedes-GLE.jpg" },
+      { id: 6, name: "Sensor ABS Range Rover Vogue", price: 120000, category: "Sensores", brand: "Land Rover", models: ["Range Rover Vogue (2013-2017)"], image: "imagens/Sensor-ABS-Range-Rover-Vogue.jpg" }
+    ];
+
+    // Estado
+    const cart = [];
+
+    // Helpers
+    const fmtAKZ = (v) => `${v.toLocaleString('pt-PT')} AKZ`;
+    const byId = (id) => document.getElementById(id);
+	    // Render catálogo
+    function renderProducts(list) {
+      const el = byId("product-list");
+      el.innerHTML = "";
+      list.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product";
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <div class="meta">
+            <span class="badge-pill">${p.brand}</span>
+            <span class="badge-pill">${p.category}</span>
+          </div>
+          <div class="meta">Compatibilidade: ${p.models.join(", ")}</div>
+          <div class="price">${fmtAKZ(p.price)}</div>
+          <div class="actions">
+            <button onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
+            <button class="outline" onclick="moreLikeThis('${p.category}', '${p.brand}')">Ver similares</button>
+          </div>
+        `;
+        el.appendChild(card);
+      });
+    }
+
+    // Render carrinho
+    function renderCart() {
+      const itemsEl = byId("cart-items");
+      itemsEl.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <div>
+            <strong>${item.name}</strong><br>
+            <span class="meta">${item.brand} • ${item.category}</span>
+          </div>
+          <div>
+            <div class="price" style="text-align:right">${fmtAKZ(item.price)}</div>
+            <button class="outline" style="margin-top:6px" onclick="removeFromCart(${index})">Remover</button>
+          </div>
+        `;
+        itemsEl.appendChild(row);
+      });
+
+      const total = cart.reduce((sum, i) => sum + i.price, 0);
+      byId("cart-total").textContent = fmtAKZ(total);
+    }
+	    // Carrinho
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      cart.push(product);
+      renderCart();
+      recommend(product); // dispara recomendações
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    // IA simples de recomendação:
+    // - Prioriza mesma categoria
+    // - Se o utilizador costuma escolher uma marca, aumenta peso dessa marca
+    const userPrefs = { brandCounts: {} };
+
+    function recommend(lastProduct) {
+      // Atualiza preferência por marca
+      userPrefs.brandCounts[lastProduct.brand] = (userPrefs.brandCounts[lastProduct.brand] || 0) + 1;
+
+      // Scora candidatos
+      const scored = products
+        .filter(p => !cart.includes(p) && p.id !== lastProduct.id)
+        .map(p => {
+          let score = 0;
+          if (p.category === lastProduct.category) score += 2;
+          score += (userPrefs.brandCounts[p.brand] || 0) * 1.5; // preferência de marca
+          return { p, score };
+        })
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+
+      // Render recomendações
+      const rec = byId("recommendation-list");
+      rec.innerHTML = "";
+      if (scored.length === 0) {
+        rec.innerHTML = "<span class='meta'>Sem recomendações no momento.</span>";
+        return;
+      }
+      scored.forEach(({ p }) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div>
+            <strong>${p.name}</strong><br>
+            <span class="meta">${p.brand} • ${p.category}</span>
+          </div>
+          <div>
+            <div class="price" style="text-align:right">${fmtAKZ(p.price)}</div>
+            <button style="margin-top:6px" onclick="addToCart(${p.id})">Adicionar</button>
+          </div>
+        `;
+        rec.appendChild(div);
+      });
+    }
+
+    // Ver similares por categoria e marca (atalho)
+    function moreLikeThis(category, brand) {
+      const subset = products.filter(p => p.category === category || p.brand === brand);
+      renderProducts(subset);
+    }
+	    // Pesquisa com ranking simples:
+    // - Pontos por match no nome, marca, categoria e modelos
+    function searchProducts(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) { renderProducts(products); return; }
+
+      const ranked = products
+        .map(p => {
+          let score = 0;
+          const fields = [
+            p.name.toLowerCase(),
+            p.brand.toLowerCase(),
+            p.category.toLowerCase(),
+            p.models.join(" ").toLowerCase()
+          ];
+          fields.forEach(f => {
+            if (f.includes(q)) score += 2;
+          });
+          // Bónus por início de palavra
+          if (p.name.toLowerCase().startsWith(q)) score += 1.5;
+          return { p, score };
+        })
+        .filter(x => x.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(x => x.p);
+
+      renderProducts(ranked);
+    }
+
+    // Eventos
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts(products);
+      renderCart();
+
+      byId("search").addEventListener("input", (e) => searchProducts(e.target.value));
+      byId("clearSearch").addEventListener("click", () => {
+        byId("search").value = "";
+        renderProducts(products);
+      });
+
+      byId("checkout").addEventListener("click", () => {
+        const qty = cart.length;
+        if (!qty) { alert("Carrinho vazio."); return; }
+        alert(`Compra finalizada com ${qty} item(ns). Obrigado!`);
+        cart.length = 0;
+        renderCart();
+        byId("recommendation-list").innerHTML = "";
+      });
+    });
+  </script>
+  </body>
+</html>
