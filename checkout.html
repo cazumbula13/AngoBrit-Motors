@@ -3,50 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Checkout – AngoBrit Motors</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Resumo da Compra</h1>
-  </header>
-
-  <main class="content">
-    <section id="checkout-list"></section>
-
-    <div class="cart-total" id="checkout-total"></div>
-
-    <!-- Botão WhatsApp -->
-    <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
-      📲 Enviar para WhatsApp
-    </a>
-  </main>
+  <h1>Resumo da Compra</h1>
+  <div id="checkout-list"></div>
+  <div id="checkout-total"></div>
+  <a id="whatsapp-btn" target="_blank">📲 Enviar para WhatsApp</a>
 
   <script>
-    // Recuperar carrinho salvo
     const carrinho = JSON.parse(localStorage.getItem("carrinhoAngoBrit")) || [];
-    const container = document.getElementById("checkout-list");
-    const totalContainer = document.getElementById("checkout-total");
-    const whatsappBtn = document.getElementById("whatsapp-btn");
+    const list = document.getElementById("checkout-list");
+    const totalEl = document.getElementById("checkout-total");
+    const btn = document.getElementById("whatsapp-btn");
 
     let total = 0;
-    let mensagem = "Olá, quero finalizar a compra com os seguintes itens:%0A";
+    let mensagem = "Olá, quero finalizar a compra:%0A";
 
     carrinho.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "product";
-      div.innerHTML = `<h3>${item.name}</h3><p>${item.price.toLocaleString()} AKZ</p>`;
-      container.appendChild(div);
-
+      list.innerHTML += `<p>${item.name} - ${item.price.toLocaleString()} AKZ</p>`;
       total += item.price;
       mensagem += `- ${item.name} (${item.price.toLocaleString()} AKZ)%0A`;
     });
 
-    totalContainer.innerHTML = `<strong>Total:</strong> ${total.toLocaleString()} AKZ`;
+    totalEl.innerHTML = `<strong>Total:</strong> ${total.toLocaleString()} AKZ`;
     mensagem += `%0ATotal: ${total.toLocaleString()} AKZ`;
 
-    // Número do WhatsApp (substituir pelo teu)
-    const numero = "244927222930";
-    whatsappBtn.href = `https://wa.me/${numero}?text=${mensagem}`;
+    btn.href = `https://wa.me/244927222930?text=${mensagem}`;
   </script>
 </body>
 </html>
