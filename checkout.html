@@ -48,12 +48,31 @@
       background: var(--primary); color: #fff;
       margin-top: 2rem;
     }
+	.home-btn {
+  display: inline-block;
+  background: var(--accent);   /* dourado discreto */
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.home-btn:hover {
+  background: #a88345; /* tom mais escuro do dourado */
+}
   </style>
 </head>
 <body>
   <header>
     <h1>Checkout – AngoBrit Motors</h1>
     <p>Peças premium com confiança e garantia</p>
+	<a href="https://cazumbula13.github.io/AngoBrit-Motors/" class="home-btn">
+  🛠️ Home
+</a>
   </header>
 
   <div class="container">
@@ -103,3 +122,4 @@
   </script>
 </body>
 </html>
+
