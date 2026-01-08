@@ -3,12 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title>Checkout – AngoBrit Motors</title>
+  <style>
+    :root {
+      --primary: #0f1c2e;
+      --accent: #c4a061;
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #2b2b2b;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+    }
+    header {
+      background: linear-gradient(90deg, var(--primary), #1f3558);
+      color: white; padding: 1rem;
+      border-bottom: 4px solid var(--accent);
+      text-align: center;
+    }
+    .container {
+      max-width: 900px; margin: 2rem auto;
+      background: var(--card); padding: 1.5rem;
+      border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    h1, h2 { margin-top: 0; }
+    .product { border-bottom: 1px solid #eee; padding: 0.5rem 0; }
+    .total { font-weight: bold; margin-top: 1rem; }
+    .payment-options {
+      margin-top: 1.5rem; padding: 1rem;
+      background: #f9fafc; border-radius: 10px;
+      border: 1px solid #d8dce2;
+    }
+    .whatsapp-btn {
+      display: block; margin-top: 1rem;
+      background: #25D366; color: #fff;
+      text-align: center; padding: 0.8rem;
+      border-radius: 6px; text-decoration: none;
+      font-weight: 600;
+    }
+    .whatsapp-btn:hover { background: #1ebe5d; }
+    footer {
+      text-align: center; padding: 1rem;
+      background: var(--primary); color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Resumo da Compra</h1>
-  <div id="checkout-list"></div>
-  <div id="checkout-total"></div>
-  <a id="whatsapp-btn" target="_blank">📲 Enviar para WhatsApp</a>
+  <header>
+    <h1>Checkout – AngoBrit Motors</h1>
+    <p>Peças premium com confiança e garantia</p>
+  </header>
+
+  <div class="container">
+    <h2>Resumo da Compra</h2>
+    <div id="checkout-list"></div>
+    <div class="total" id="checkout-total"></div>
+
+    <div class="payment-options">
+      <h2>Formas de Pagamento</h2>
+      <ul>
+        <li>💳 Transferência Bancária (IBAN disponível após pedido)</li>
+        <li>🏧 Multicaixa Express</li>
+        <li>📲 Pagamento via WhatsApp com confirmação imediata</li>
+      </ul>
+    </div>
+
+    <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
+      📲 Enviar pedido para WhatsApp
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2026 AngoBrit Motors – Venda de peças Auto premium
+  </footer>
 
   <script>
     const carrinho = JSON.parse(localStorage.getItem("carrinhoAngoBrit")) || [];
@@ -20,7 +89,7 @@
     let mensagem = "Olá, quero finalizar a compra:%0A";
 
     carrinho.forEach(item => {
-      list.innerHTML += `<p>${item.name} - ${item.price.toLocaleString()} AKZ</p>`;
+      list.innerHTML += `<div class="product"><strong>${item.name}</strong> - ${item.price.toLocaleString()} AKZ</div>`;
       total += item.price;
       mensagem += `- ${item.name} (${item.price.toLocaleString()} AKZ)%0A`;
     });
@@ -28,7 +97,9 @@
     totalEl.innerHTML = `<strong>Total:</strong> ${total.toLocaleString()} AKZ`;
     mensagem += `%0ATotal: ${total.toLocaleString()} AKZ`;
 
-    btn.href = `https://wa.me/244927222930?text=${mensagem}`;
+    // Número do WhatsApp
+    const numero = "244927222930";
+    btn.href = `https://wa.me/${numero}?text=${mensagem}`;
   </script>
 </body>
 </html>
